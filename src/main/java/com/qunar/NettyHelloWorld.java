@@ -1,12 +1,13 @@
 package com.qunar;
 
 /**
- * Date: 2014-02-24 16:56
+ * Date: 2014-02-24 17:22
  *
  * @author sen.chai
  */
-public class Test {
+public class NettyHelloWorld {
+
     public static void main(String[] args) {
-        System.out.println("this is my netty world!");
+
     }
 }
