@@ -1,16 +1,11 @@
-package com.qunar;
+package com.qunar.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.HttpResponse;
 import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static io.netty.handler.codec.http.HttpResponseStatus.*;
-import static io.netty.handler.codec.http.HttpVersion.*;
 
 /**
  * Date: 2014-02-24 17:23
@@ -30,7 +25,8 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
                 inMsg.append((char) in.readByte());
             }
             logger.debug("msg: {}", inMsg);
-            ctx.writeAndFlush("haha");
+            ByteBuf buffer = ctx.alloc().buffer().writeBytes("haha".getBytes());
+            ctx.writeAndFlush(buffer);
         } finally {
             ReferenceCountUtil.release(msg);
         }

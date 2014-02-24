@@ -1,5 +1,8 @@
 package com.qunar;
 
+import com.qunar.handler.DiscardServerHandler;
+import com.qunar.handler.TimeDecoder;
+import com.qunar.handler.TimeEncoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -32,7 +35,9 @@ public class DiscardServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new DiscardServerHandler());
+                            //ch.pipeline().addLast(new DiscardServerHandler());
+                            ch.pipeline().addLast(new TimeEncoder()).addLast(new TimeDecoder());
+                            //ch.pipeline().addLast(new TimeServerHandler()).addLast(new DiscardServerHandler());
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)
